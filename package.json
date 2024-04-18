@@ -1,0 +1,46 @@
+{
+  "name": "automizer",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/denisavitski/automizer.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/denisavitski/automizer/issues"
+  },
+  "homepage": "https://github.com/denisavitski/automizer#readme",
+  "type": "module",
+  "files": [
+    "lib"
+  ],
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./lib/index.js"
+    }
+  },
+  "scripts": {
+    "dev": "tsx ./playground/index.ts",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.7",
+    "tsx": "^4.7.2",
+    "typescript": "^5.4.5",
+    "vite": "^5.2.9",
+    "vite-plugin-dts": "^3.8.3"
+  },
+  "dependencies": {
+    "favicons": "^7.2.0",
+    "ffmpeg-extract-frames": "^2.0.2",
+    "mkdirp": "^3.0.1",
+    "node-html-parser": "^6.1.13",
+    "sharp": "^0.33.3"
+  }
+}
