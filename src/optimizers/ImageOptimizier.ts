@@ -1,9 +1,9 @@
-import { statSync, readdirSync } from 'fs'
 import { copyFile } from 'fs/promises'
 import { mkdirp } from 'mkdirp'
-import { extname, join, sep } from 'path'
+import { extname, sep } from 'path'
 import sharp from 'sharp'
 import { clearDir } from '../utils/clearDir'
+import { getFiles } from '../utils/getFiles'
 
 export interface ImageOptimizerParameters {
   srcFolder: string
@@ -37,7 +37,7 @@ export class ImageOptimizer {
   }
 
   public async optimize() {
-    const files = this.#readFiles()
+    const files = getFiles(this.#srcFolder, this.#destFolder)
 
     clearDir(this.#destFolder)
 
@@ -129,29 +129,6 @@ export class ImageOptimizer {
         await copyFile(file.srcPath, file.destPath)
       }
     }
-  }
-
-  #readFiles(directory: string = this.#srcFolder) {
-    let files: Array<{ srcPath: string; destPath: string }> = []
-
-    const filesInDirectory = readdirSync(directory)
-
-    for (const file of filesInDirectory) {
-      const srcPath = join(directory, file)
-      const destPath = join(
-        this.#destFolder,
-        srcPath.replaceAll(sep, '/').replace(this.#srcFolder, '')
-      )
-
-      if (statSync(srcPath).isDirectory()) {
-        const result = this.#readFiles(srcPath)
-        files = [...files, ...result]
-      } else {
-        files.push({ srcPath, destPath })
-      }
-    }
-
-    return files
   }
 
   #replaceExt(path: string, ext: string) {
