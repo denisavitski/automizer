@@ -1,6 +1,6 @@
 {
   "name": "automizer",
-  "version": "0.1.2",
+  "version": "0.1.2-wbr",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/denisavitski/automizer.git"
@@ -37,7 +37,6 @@
     "vite-plugin-dts": "^3.8.3"
   },
   "dependencies": {
-    "@imgly/background-removal-node": "^1.4.5",
     "favicons": "^7.2.0",
     "ffmpeg-extract-frames": "^2.0.2",
     "mkdirp": "^3.0.1",

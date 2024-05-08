@@ -1,3 +1,5 @@
+//@ts-nocheck
+
 import { clearDir } from '../utils/clearDir.js'
 import imglyRemoveBackground from '@imgly/background-removal-node'
 import { mkdirSync } from 'fs'
