@@ -1,0 +1,1 @@
+export type xx = 'playground/result/types/backgrounds/background.jpg' | 'playground/result/types/backgrounds/text-light.png' | 'playground/result/types/x/text.png'
