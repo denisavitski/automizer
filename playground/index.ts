@@ -1,12 +1,7 @@
-import { ImageOptimizer, SVGSpriteGenerator, UnionTypeGenerator } from '../src'
+import { VideoOptimizer } from '../src'
 
-await new ImageOptimizer({
-  srcFolder: 'playground/source/images/',
-  destFolder: 'playground/result/images/',
+await new VideoOptimizer({
+  srcFolder: 'playground/source/videos/',
+  destFolder: 'playground/result/videos/',
+  scale: 0.8,
 }).optimize()
-
-new SVGSpriteGenerator({
-  srcFolder: 'playground/source/icons',
-  destFile: 'playground/result/sprite.svg',
-  name: 'xx',
-}).generate()
