@@ -1,7 +1,40 @@
-import { VideoOptimizer } from '../src'
+import { optimizer } from '../src'
 
-await new VideoOptimizer({
-  srcFolder: 'playground/source/videos/',
-  destFolder: 'playground/result/videos/',
-  scale: 0.8,
-}).optimize()
+optimizer({
+  sourceFolder: 'playground/source',
+  destinationFolder: 'playground/dest',
+  settings: {
+    image: (p) => {
+      return {
+        forceJPG: true,
+        placeholder: true,
+        webp: true,
+        path:
+          p.destinationPath.split('.').slice(0, -1).join('.') +
+          '.qwerty.' +
+          p.destinationPath.split('.').slice(-1).join('.'),
+      }
+    },
+    video: () => {
+      return {
+        scale: 0.7,
+        quality: 50,
+      }
+    },
+    favicon: () => {
+      return {
+        appDescription: 'qwerty',
+      }
+    },
+    sprite: () => {
+      return {
+        name: 'qwerty',
+      }
+    },
+    sequence: () => {
+      return {
+        fps: 2,
+      }
+    },
+  },
+})
