@@ -1,8 +1,6 @@
 import { statSync } from 'fs'
 import { extname, join, sep } from 'path'
 import {
-  ALLOWED_IMAGE_EXTENSIONS,
-  ALLOWED_VIDEO_EXTENSIONS,
   FaviconSource,
   ImageSource,
   KnownSource,
@@ -14,6 +12,10 @@ import {
 import { readdir, readFile } from 'fs/promises'
 import { getFolderFiles } from './utils/fs'
 import { removeExtension } from './utils/path'
+import {
+  ALLOWED_IMAGE_EXTENSIONS,
+  ALLOWED_VIDEO_EXTENSIONS,
+} from './allowedExtensions'
 
 export interface InputFilesCallbackEntry {
   type: KnownSource['type']
