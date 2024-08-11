@@ -25,7 +25,7 @@ export {
 
 export { optimizeImage } from './optimizeImage'
 
-export { optimizer } from './optimizer'
+export { automizer, type AutomizerParameters } from './automizer'
 
 export { optimizeVideo } from './optimizeVideo'
 
@@ -39,6 +39,9 @@ export {
   type SpriteSource,
   type SequenceSource,
   type KnownSource,
+  type OutputItemData,
+  type OutputItem,
+  type Output,
   ALLOWED_IMAGE_EXTENSIONS,
   ALLOWED_VIDEO_EXTENSIONS,
 } from './types'

@@ -1,6 +1,5 @@
 import { parse } from 'node-html-parser'
-import { SpriteSource } from './types'
-import { Output } from './utils/types'
+import { Output, SpriteSource } from './types'
 import { getBuffer } from './utils/buffer'
 
 export async function generateSprite(source: Omit<SpriteSource, 'type'>) {

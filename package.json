@@ -1,6 +1,6 @@
 {
   "name": "automizer",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/denisavitski/automizer.git"
@@ -30,12 +30,12 @@
     "preview": "vite preview"
   },
   "devDependencies": {
-    "@types/fluent-ffmpeg": "^2.1.24",
-    "@types/node": "^20.12.7",
-    "tsx": "^4.7.2",
-    "typescript": "^5.4.5",
-    "vite": "^5.2.9",
-    "vite-plugin-dts": "^3.8.3"
+    "@types/fluent-ffmpeg": "^2.1.25",
+    "@types/node": "^22.2.0",
+    "tsx": "^4.17.0",
+    "typescript": "^5.5.4",
+    "vite": "^5.4.0",
+    "vite-plugin-dts": "^4.0.2"
   },
   "dependencies": {
     "favicons": "^7.2.0",

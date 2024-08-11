@@ -3,7 +3,7 @@ import { dirname, join } from 'path'
 import Ffmpeg from 'fluent-ffmpeg'
 import { outputFile, getFolderFiles, clear } from './utils/fs'
 import { getTmpPath, removeExtension } from './utils/path'
-import { Output } from './utils/types'
+import { Output } from './types'
 
 export interface FFmpegParameters {
   inputPath: string

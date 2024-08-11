@@ -3,9 +3,8 @@ import { generateSequence } from './generateSequence'
 import { generateSprite } from './generateSprite'
 import { optimizeImage } from './optimizeImage'
 import { optimizeVideo } from './optimizeVideo'
-import { KnownSource } from './types'
+import { KnownSource, Output } from './types'
 import { getBuffer } from './utils/buffer'
-import { Output } from './utils/types'
 
 export interface OptimizeProgress {
   ready: number
@@ -28,22 +27,28 @@ export async function optimize(
   let ready = 0
 
   for await (const source of sources) {
+    let optimized: Output = []
+
     if (source.type === 'image') {
-      output.push(...(await optimizeImage(source)))
+      optimized = await optimizeImage(source)
     } else if (source.type === 'video') {
-      output.push(...(await optimizeVideo(source)))
+      optimized = await optimizeVideo(source)
     } else if (source.type === 'favicon') {
-      output.push(...(await generateFavicon(source)))
+      optimized = await generateFavicon(source)
     } else if (source.type === 'sprite') {
-      output.push(...(await generateSprite(source)))
+      optimized = await generateSprite(source)
     } else if (source.type === 'sequence') {
-      output.push(...(await generateSequence(source)))
+      optimized = await generateSequence(source)
     } else {
-      output.push({
-        data: await getBuffer(source.content),
-        destinationPath: source.settings.destinationPath,
-      })
+      optimized = [
+        {
+          data: await getBuffer(source.content),
+          destinationPath: source.settings.destinationPath,
+        },
+      ]
     }
+
+    output.push(...optimized)
 
     options?.onProgress?.({
       ready: ++ready,

@@ -1,8 +1,7 @@
 import sharp from 'sharp'
-import { ImageSource } from './types'
+import { ImageSource, Output } from './types'
 import { extname } from 'path'
 import { getBuffer } from './utils/buffer'
-import { Output } from './utils/types'
 import { getNumberSetting } from './utils/params'
 import { replaceExtension } from './utils/path'
 

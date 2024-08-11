@@ -1,3 +1,4 @@
+import type { writeFile } from 'fs/promises'
 import type { FaviconOptions } from 'favicons'
 
 export type SourceDefaultSettings = {
@@ -88,3 +89,12 @@ export type KnownSource =
 
 export const ALLOWED_IMAGE_EXTENSIONS = ['jpg', 'png', 'webp', 'jpeg'] as const
 export const ALLOWED_VIDEO_EXTENSIONS = ['mp4', 'mov'] as const
+
+export type OutputItemData = Parameters<typeof writeFile>['1']
+
+export interface OutputItem {
+  data: OutputItemData
+  destinationPath: string
+}
+
+export type Output = Array<OutputItem>

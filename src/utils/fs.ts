@@ -1,9 +1,9 @@
 import { mkdir, readdir, readFile, rm, writeFile } from 'fs/promises'
 import { dirname, extname, join } from 'path'
-import { Output, WriteFileData } from './types'
 import { removeExtension } from './path'
+import { Output, OutputItemData } from '../types'
 
-export async function outputFile(path: string, data: WriteFileData) {
+export async function outputFile(path: string, data: OutputItemData) {
   await mkdir(dirname(path), { recursive: true })
   await writeFile(path, data)
 }
