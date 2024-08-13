@@ -1,8 +1,3 @@
-export {
-  ALLOWED_IMAGE_EXTENSIONS,
-  ALLOWED_VIDEO_EXTENSIONS,
-} from './allowedExtensions'
-
 export { FFmpeg, type FFmpegParameters } from './FFmpeg'
 
 export { generateFavicon } from './generateFavicon'

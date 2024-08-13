@@ -1,6 +1,6 @@
 {
   "name": "automizer",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/denisavitski/automizer.git"
@@ -21,7 +21,19 @@
   "types": "./lib/index.d.ts",
   "exports": {
     ".": {
-      "import": "./lib/index.js"
+      "import": "./lib/index.js",
+      "types": "./lib/index.d.ts"
+    },
+    "./allowedExtensions": {
+      "import": "./allowedExtensions.js",
+      "types": "./allowedExtensions.d.ts"
+    }
+  },
+  "typesVersions": {
+    "*": {
+      "allowedExtensions": [
+        "lib/allowedExtensions.d.ts"
+      ]
     }
   },
   "scripts": {
