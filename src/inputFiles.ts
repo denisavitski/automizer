@@ -2,6 +2,8 @@ import { statSync } from 'fs'
 import { extname, join, sep } from 'path'
 import {
   FaviconSource,
+  HeadMetaSettings,
+  HeadSource,
   ImageSource,
   KnownSource,
   SequenceSource,
@@ -35,6 +37,15 @@ export interface InputsFilesCallbackFaviconParameters
   destinationHtmlPath: string
 }
 
+export interface InputsFilesCallbackHeadParameters
+  extends InputsFilesCallbackFaviconParameters {
+  destinationCoverPath: string
+}
+
+export interface InputsFilesCallbackHeadParameters
+  extends InputsFilesCallbackFaviconParameters,
+    HeadMetaSettings {}
+
 export interface InputFilesSettings {
   image?(
     parameters: InputsFilesCallbackDefaultParameters
@@ -47,6 +58,10 @@ export interface InputFilesSettings {
   favicon?(
     parameters: InputsFilesCallbackFaviconParameters
   ): Partial<FaviconSource['settings']>
+
+  head?(
+    parameters: InputsFilesCallbackHeadParameters
+  ): Partial<HeadSource['settings']>
 
   sprite?(
     parameters: InputsFilesCallbackDefaultParameters
@@ -130,6 +145,40 @@ export async function inputFiles({
               }),
             },
           })
+        } else if (sourcePath.includes('@head')) {
+          const files = await getFolderFiles(sourcePath)
+
+          const favicon = files.find((file) => file.name.includes('favicon'))
+          const cover = files.find((file) => file.name.includes('cover'))
+
+          const destinationFolderPath = specialPath(destinationPath, '@head')
+
+          const destinationHtmlPath = `${destinationFolderPath}/head.html`
+          const destinationCoverPath = cover
+            ? join(destinationPath, cover.name + cover.ext)
+            : join(destinationPath, 'cover.jpg')
+
+          sources.push({
+            content: {
+              cover: cover?.buffer,
+              favicon: favicon?.buffer,
+            },
+            type: 'head',
+            settings: {
+              destinationPath: destinationFolderPath,
+              destinationHtmlPath,
+              destinationCoverPath,
+              ...settings?.head?.({
+                title: '{title}',
+                description: '{description}',
+                metaTitle: '{metaTitle}',
+                url: '{url}',
+                destinationPath: destinationFolderPath,
+                destinationHtmlPath,
+                destinationCoverPath,
+              }),
+            },
+          })
         } else {
           const result = await inputFiles({
             sourceFolder: sourcePath,
@@ -150,7 +199,7 @@ export async function inputFiles({
             '@favicon'
           )
 
-          const destinationHtmlPath = `${destinationFolderPath}/head.html`
+          const destinationHtmlPath = `${destinationFolderPath}/favicon.html`
 
           sources.push({
             content,

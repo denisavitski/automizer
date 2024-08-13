@@ -1,4 +1,5 @@
 import { generateFavicon } from './generateFavicon'
+import { generateHead } from './generateHead'
 import { generateSequence } from './generateSequence'
 import { generateSprite } from './generateSprite'
 import { optimizeImage } from './optimizeImage'
@@ -35,6 +36,8 @@ export async function optimize(
       optimized = await optimizeVideo(source)
     } else if (source.type === 'favicon') {
       optimized = await generateFavicon(source)
+    } else if (source.type === 'head') {
+      optimized = await generateHead(source)
     } else if (source.type === 'sprite') {
       optimized = await generateSprite(source)
     } else if (source.type === 'sequence') {

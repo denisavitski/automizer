@@ -79,6 +79,25 @@ export type SequenceSource = Source<
   }
 >
 
+export interface HeadMetaSettings {
+  title?: string
+  description?: string
+  metaTitle?: string
+  url?: string
+  keywords?: string
+}
+
+export type HeadSettings = HeadMetaSettings &
+  FaviconSource['settings'] & {
+    destinationCoverPath: string
+  }
+
+export type HeadSource = Source<
+  { favicon?: Buffer | File; cover?: Buffer | File },
+  'head',
+  HeadSettings
+>
+
 export type KnownSource =
   | VideoSource
   | ImageSource
@@ -86,6 +105,7 @@ export type KnownSource =
   | FaviconSource
   | SpriteSource
   | SequenceSource
+  | HeadSource
 
 export type OutputItemData = Parameters<typeof writeFile>['1']
 
