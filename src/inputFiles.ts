@@ -2,7 +2,6 @@ import { statSync } from 'fs'
 import { extname, join, sep } from 'path'
 import {
   FaviconSource,
-  HeadMetaSettings,
   HeadSource,
   ImageSource,
   KnownSource,
@@ -38,13 +37,7 @@ export interface InputsFilesCallbackFaviconParameters
 }
 
 export interface InputsFilesCallbackHeadParameters
-  extends InputsFilesCallbackFaviconParameters {
-  destinationCoverPath: string
-}
-
-export interface InputsFilesCallbackHeadParameters
-  extends InputsFilesCallbackFaviconParameters,
-    HeadMetaSettings {}
+  extends InputsFilesCallbackFaviconParameters {}
 
 export interface InputFilesSettings {
   image?(
@@ -61,7 +54,7 @@ export interface InputFilesSettings {
 
   head?(
     parameters: InputsFilesCallbackHeadParameters
-  ): Partial<HeadSource['settings']>
+  ): Partial<Omit<HeadSource['settings'], 'path' | 'destinationCoverPath'>>
 
   sprite?(
     parameters: InputsFilesCallbackDefaultParameters
@@ -155,8 +148,10 @@ export async function inputFiles({
 
           const destinationHtmlPath = `${destinationFolderPath}/head.html`
           const destinationCoverPath = cover
-            ? join(destinationPath, cover.name + cover.ext)
-            : join(destinationPath, 'cover.jpg')
+            ? join(destinationFolderPath, cover.name + cover.ext)
+            : join(destinationFolderPath, 'cover.jpg')
+
+          const base = destinationFolderPath.replace(destinationFolder, '')
 
           sources.push({
             content: {
@@ -168,14 +163,10 @@ export async function inputFiles({
               destinationPath: destinationFolderPath,
               destinationHtmlPath,
               destinationCoverPath,
+              path: base,
               ...settings?.head?.({
-                title: '{title}',
-                description: '{description}',
-                metaTitle: '{metaTitle}',
-                url: '{url}',
                 destinationPath: destinationFolderPath,
                 destinationHtmlPath,
-                destinationCoverPath,
               }),
             },
           })

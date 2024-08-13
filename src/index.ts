@@ -7,6 +7,8 @@ export { FFmpeg, type FFmpegParameters } from './FFmpeg'
 
 export { generateFavicon } from './generateFavicon'
 
+export { generateHead } from './generateHead'
+
 export { generateSequence } from './generateSequence'
 
 export { generateSprite } from './generateSprite'
@@ -16,6 +18,7 @@ export {
   type InputFilesParameters,
   type InputFilesSettings,
   type InputsFilesCallbackFaviconParameters,
+  type InputsFilesCallbackHeadParameters,
   type InputsFilesCallbackDefaultParameters,
   type InputFilesCallback,
   type InputFilesCallbackEntry,
@@ -41,6 +44,9 @@ export {
   type ImageSource,
   type VideoSource,
   type FaviconSource,
+  type HeadMetaSettings,
+  type HeadSettings,
+  type HeadSource,
   type SpriteSource,
   type SequenceSource,
   type KnownSource,
