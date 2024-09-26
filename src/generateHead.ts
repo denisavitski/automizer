@@ -3,6 +3,7 @@ import { generateFavicon } from './generateFavicon'
 import { optimizeImage } from './optimizeImage'
 import { OutputItem } from '../lib'
 import dedent from 'dedent'
+import { join } from 'path'
 
 export async function generateHead(source: Omit<HeadSource, 'type'>) {
   const output: Output = []
@@ -23,17 +24,20 @@ export async function generateHead(source: Omit<HeadSource, 'type'>) {
     output.push(...res.slice(0, -1))
   }
 
-  const base = source.settings.path || ''
   const title = source.settings.title || source.settings.appName || ''
   const metaTitle = source.settings.metaTitle || title || ''
   const description =
     source.settings.description || source.settings.appDescription || ''
-  let url = source.settings.url || ''
-  url = url.endsWith('/') ? url.slice(0, -1) : url
   const keywords = source.settings.keywords || ''
-  const cover = `${url}${base}${source.settings.destinationCoverPath
-    .split(base)
-    .slice(-1)}`
+
+  const url = source.settings.url || ''
+  const path = source.settings.path || ''
+  const coverName = source.settings.destinationCoverPath
+    .split('/')
+    .slice(-1)
+    .join('/')
+
+  const cover = join(url, path, coverName)
 
   head.data += dedent`
     <title>${title}</title>
