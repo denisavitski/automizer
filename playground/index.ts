@@ -4,4 +4,5 @@ automizer({
   sourceFolder: 'playground/source',
   destinationFolder: 'public',
   clearDestination: true,
+  settings: {},
 })

@@ -25,16 +25,18 @@ export async function generateSprite(source: Omit<SpriteSource, 'type'>) {
     icon.removeAttribute('width')
     icon.removeAttribute('height')
 
-    if (settings.removeFill) {
-      icon.querySelectorAll('*').forEach((child) => {
-        child.removeAttribute('fill')
-      })
-    }
+    if (!icon.hasAttribute('data-keep-colors')) {
+      if (settings.removeFill) {
+        icon.querySelectorAll('*').forEach((child) => {
+          child.removeAttribute('fill')
+        })
+      }
 
-    if (settings.removeStroke) {
-      icon.querySelectorAll('*').forEach((child) => {
-        child.removeAttribute('stroke')
-      })
+      if (settings.removeStroke) {
+        icon.querySelectorAll('*').forEach((child) => {
+          child.removeAttribute('stroke')
+        })
+      }
     }
 
     const symbolOpenTag = `<symbol id="${`${spriteName}:${item.name}`}" viewBox="${icon.getAttribute(
