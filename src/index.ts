@@ -9,6 +9,12 @@ export { generateSequence } from './generateSequence'
 export { generateSprite } from './generateSprite'
 
 export {
+  generateUnion,
+  type GenerateUnionParamters,
+  type UnitNameHandler,
+} from './generateUnion'
+
+export {
   inputFiles,
   type InputFilesParameters,
   type InputFilesSettings,
