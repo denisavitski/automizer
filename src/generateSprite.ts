@@ -28,13 +28,17 @@ export async function generateSprite(source: Omit<SpriteSource, 'type'>) {
     if (!icon.hasAttribute('data-keep-colors')) {
       if (settings.removeFill) {
         icon.querySelectorAll('*').forEach((child) => {
-          child.removeAttribute('fill')
+          if (!child.hasAttribute('data-keep-fill')) {
+            child.removeAttribute('fill')
+          }
         })
       }
 
       if (settings.removeStroke) {
         icon.querySelectorAll('*').forEach((child) => {
-          child.removeAttribute('stroke')
+          if (!child.hasAttribute('data-keep-stroke')) {
+            child.removeAttribute('stroke')
+          }
         })
       }
     }
