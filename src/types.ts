@@ -65,7 +65,9 @@ export type SpriteSource = Source<
     destinationPath: string
     name?: string
     removeStroke?: boolean
+    removeStrokeOpacity?: boolean
     removeFill?: boolean
+    removeFillOpacity?: boolean
   }
 >
 

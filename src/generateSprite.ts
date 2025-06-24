@@ -34,10 +34,26 @@ export async function generateSprite(source: Omit<SpriteSource, 'type'>) {
         })
       }
 
+      if (settings.removeFillOpacity) {
+        icon.querySelectorAll('*').forEach((child) => {
+          if (!child.hasAttribute('data-keep-fill-opacity')) {
+            child.removeAttribute('fill-opacity')
+          }
+        })
+      }
+
       if (settings.removeStroke) {
         icon.querySelectorAll('*').forEach((child) => {
           if (!child.hasAttribute('data-keep-stroke')) {
             child.removeAttribute('stroke')
+          }
+        })
+      }
+
+      if (settings.removeStrokeOpacity) {
+        icon.querySelectorAll('*').forEach((child) => {
+          if (!child.hasAttribute('data-keep-stroke-opacity')) {
+            child.removeAttribute('stroke-opacity')
           }
         })
       }

@@ -1,7 +1,6 @@
-import { HeadSource, Output } from './types'
+import { HeadSource, Output, OutputItem } from './types'
 import { generateFavicon } from './generateFavicon'
 import { optimizeImage } from './optimizeImage'
-import { OutputItem } from '../lib'
 import dedent from 'dedent'
 import { join } from 'path'
 
