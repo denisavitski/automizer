@@ -35,6 +35,7 @@ export type ImageSource = Source<
     placeholder?: boolean
     webp?: boolean
     forceJPG?: boolean | string
+    progressive?: boolean
   }
 >
 

@@ -33,6 +33,7 @@ export async function optimizeImage(source: Omit<ImageSource, 'type'>) {
     image.jpeg({
       mozjpeg: true,
       quality: quality,
+      progressive: source.settings.progressive,
     })
   } else if (ext === '.png') {
     if (settings.forceJPG) {
@@ -42,6 +43,7 @@ export async function optimizeImage(source: Omit<ImageSource, 'type'>) {
       image
         .jpeg({
           mozjpeg: true,
+          progressive: source.settings.progressive,
         })
         .flatten({ background: bg })
 
@@ -53,6 +55,7 @@ export async function optimizeImage(source: Omit<ImageSource, 'type'>) {
         adaptiveFiltering: true,
         quality: quality,
         effort: 8,
+        progressive: source.settings.progressive,
       })
     }
   }
